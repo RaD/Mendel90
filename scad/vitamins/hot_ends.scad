@@ -21,6 +21,7 @@ m90_hot_end_12p75mm = [m90,      "HEM90340: Mendel 90 hot end", 57, 10,         
 
 JHeadMk4 =            [jhead,   "HEJH16340: JHead MK4 hot end", 64, jhead_inset, 16,    50, "black", 12,            true, 10.19 + 4, [0, 2.94, -5]];
 JHeadMk5 =            [jhead,   "HEJH16340: JHead MK5 hot end", 54, jhead_inset, 16,    40, "black", 12,            true, 9     + 4, [0, 2.38, -5]];
+MakerGear =           [jhead,   "MAKERGEAR: hot end",           55, jhead_inset, 16,    27, "black", 12,            true, 9     + 4, [0, 2.38, -5]];
 
 function hot_end_style(type)              = type[0];
 function hot_end_part(type)               = type[1];
