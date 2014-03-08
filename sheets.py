@@ -64,7 +64,7 @@ def sheets(machine):
                         #
                         # Make PDF for printing
                         #
-                        InkCL.run("-f", base_name + ".svg", "-A", base_name + ".pdf")
+                        #InkCL.run("-f", base_name + ".svg", "-A", base_name + ".pdf")
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
