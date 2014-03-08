@@ -13,6 +13,7 @@ module sanguinololu() {
     import("../imported_stls/sanguinololu.stl");
 }
 
+RAMPS14      = ["RAMPS 1.4: Mega 2560 + Extension",   110,        80,          1.5 * 2.54, ["USB"]];
 Sanguinololu = ["SANGUINOL: Sanguinolou electronics", 4   * 25.4,    2 * 25.4, 1.5 * 2.54, []];
 Melzi =        ["MELZI: Melzi electronics",           8.2 * 25.4, 1.95 * 25.4, 1.5 * 2.54, ["USBLEAD: USB A to Mini B lead",
                                                                                                  "SDCARD: Micro SD card",
