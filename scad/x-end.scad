@@ -53,7 +53,7 @@ module z_linear_bearings(motor_end) {
 
 
             //entry cut out
-            translate([10 * sqrt(2) - opening, 0, bearing_height / 2])
+            #translate([10 * sqrt(2) - opening, 0, bearing_height / 2])
                 rotate([0, 0, 45])
                     cube([20, 20, bearing_height + 1], center = true);
 
@@ -264,7 +264,7 @@ module x_end_bracket(motor_end, integral_support = false){
                     translate([front - length / 2, 0, bearing_height / 2 - thickness / 2])
                         cube([length, bearing_width, bearing_height], true);
 
-                    translate([-bearing_depth - length / 2 - eta, 0, nut_shelf - bearing_height / 2])
+                    translate([-bearing_depth - length / 2 - eta, 0, 12+nut_shelf - bearing_height / 2])
                         rounded_rectangle([length, bearing_width - 2 * web, bearing_height], 2);
                 }
                 if(motor_end)
@@ -325,7 +325,7 @@ module x_end_bracket(motor_end, integral_support = false){
             // Hole for z leadscrew
             //
             difference() {
-                translate([-z_bar_offset(), 0, - thickness / 2])
+                translate([-z_bar_offset(), 0, -69 + nut_thickness(M8_nut)])
                     nut_trap((Z_screw_dia + 1) / 2, Z_nut_radius, nut_shelf + thickness / 2 + nut_trap_depth(Z_nut), supported = integral_support);
 
                 if(integral_support)
@@ -333,7 +333,10 @@ module x_end_bracket(motor_end, integral_support = false){
                         cylinder(r = Z_nut_radius + 1, h = 2 * layer_height, center = true);
             }
 
-            translate([-z_bar_offset(), 0, -thickness / 2 - 1])
+            translate([-30,10,40.5]) rotate([0,22,0])
+                cube([20,10,60], center=true);
+
+            *translate([-z_bar_offset(), 0, -thickness / 2 - 1])
                 cylinder(r = Z_nut_radius + 1, h = thickness + 2, $fn = 6);
 
             for(side = [-1, 1]) {
@@ -490,7 +493,7 @@ module x_end_assembly(motor_end) {
                 }
 
     if(motor_end) {
-        translate([x_motor_offset(), mbracket_front + eta, 0]) {
+        *translate([x_motor_offset(), mbracket_front + eta, 0]) {
             rotate([90, motor_angle - 90, 0]) {
                 NEMA(X_motor);
                 translate([0,0, mbracket_thickness])
