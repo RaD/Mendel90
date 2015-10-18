@@ -1,1 +1,1 @@
-include <dibond_config.scad>
+include <dibond12_config.scad>
