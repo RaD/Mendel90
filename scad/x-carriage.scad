@@ -577,7 +577,19 @@ module x_carriage_stl(){
                 translate([- bar_x, -bar_y, bar_offset - top_thickness]) rotate([0,0,90]) bearing_holder(X_bearings, bar_offset - eta);
                 translate([+ bar_x, -bar_y, bar_offset - top_thickness]) rotate([0,0,90]) bearing_holder(X_bearings, bar_offset - eta);
 
+                // block for fan duct
+                translate([43,0,3]) {
+                    cube([10, 10, 6], center=true);
+                }
             }
+            // hole for fan duct
+            translate([43,0,3]) {
+                translate([0,0,-0.1]) {
+                    scale(1.1) rotate([0,90,0]) cylinder(d=3, h=30, center=true);
+                    scale(1.05) translate([-4.8,0,0]) rotate([0,90,0]) rotate([0,0,30]) nut(M3_nut);
+                }
+            }
+
             translate([-base_offset, 0, 0]) {
                 // hole to clear the hot end
                 translate([0, - hole_offset])
@@ -585,10 +597,12 @@ module x_carriage_stl(){
 
                 // holes for connecting extruder
                 for(xy = mounting_holes)
-                    translate([xy[0], xy[1], nut_trap_thickness - top_thickness])
-                        nut_trap(M4_clearance_radius, M4_nut_radius, M4_nut_trap_depth);
-
-            }
+                    translate([xy[0], xy[1], nut_trap_thickness - top_thickness]) {
+                        cylinder(d=4, h=50, center=true);
+                        #translate([0,0,-1.5]) cylinder(d=8, h=3, center=true);
+                        //nut_trap(M4_clearance_radius, M4_nut_radius, M4_nut_trap_depth);
+                    }
+                }
             //
             // Belt grip dowel hole
             //
@@ -730,9 +744,9 @@ module x_carriage_assembly(show_extruder = true, show_fan = true) {
 module x_carriage_parts_stl() {
     x_carriage_stl();
     translate([fan_x, fan_y - 2, 0]) rotate([0, 0, 180]) x_carriage_fan_bracket_stl();
-    //x_belt_clamp_stl();
-    //translate([-(lug_width + 2),0,0]) x_belt_grip_stl();
-    //translate([6, 8, 0]) rotate([0, 0, -90]) x_belt_tensioner_stl();
+    x_belt_clamp_stl();
+    translate([-(lug_width + 2),0,0]) x_belt_grip_stl();
+    translate([6, 8, 0]) rotate([0, 0, -90]) x_belt_tensioner_stl();
 }
 
 
@@ -743,7 +757,7 @@ module x_carriage_fan_ducts_stl() {
             x_carriage_fan_duct_stl();
 }
 
-if(0)
+if(1)
     if(0)  {
         intersection() {
             x_carriage_fan_duct_stl();
